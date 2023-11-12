@@ -203,7 +203,7 @@ const AddViewReferencesGirl = () => {
             }
 
             <div style={{ marginTop: '400px' }}>
-                <Link to={`/addtionalInfo/${id}`} style={{ color: 'grey', textDecoration: 'none' }}>
+                <Link to={`/addtionalInfoGirls/${id}`} style={{ color: 'grey', textDecoration: 'none' }}>
                     <span style={{ marginRight: '5px' }}>&#8592;</span>
                     Back
                 </Link>
