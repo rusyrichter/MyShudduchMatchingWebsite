@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShudduchMatchingWebsiteDB.Web", "ShudduchMatchingWebsiteDB.Web\ShudduchMatchingWebsiteDB.Web.csproj", "{324C62F9-1555-4B17-96A7-3366256E1FBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShudduchMatchingWebsitesDB.Data", "ShudduchMatchingWebsitesDB.Data\ShudduchMatchingWebsitesDB.Data.csproj", "{EC1D0DBA-DC75-45AE-BB38-BD0E868B57A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{324C62F9-1555-4B17-96A7-3366256E1FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324C62F9-1555-4B17-96A7-3366256E1FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324C62F9-1555-4B17-96A7-3366256E1FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324C62F9-1555-4B17-96A7-3366256E1FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC1D0DBA-DC75-45AE-BB38-BD0E868B57A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC1D0DBA-DC75-45AE-BB38-BD0E868B57A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC1D0DBA-DC75-45AE-BB38-BD0E868B57A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC1D0DBA-DC75-45AE-BB38-BD0E868B57A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F07FD685-87A6-4D95-84C1-0048508DB61B}
+	EndGlobalSection
+EndGlobal

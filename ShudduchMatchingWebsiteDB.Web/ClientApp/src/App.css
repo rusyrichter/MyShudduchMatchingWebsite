@@ -1,0 +1,129 @@
+
+.app-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-image {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyLTduMJL95RmhXUT61lxc1sY84Rn4PTc3rAKfjq801w&s');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    margin: -45px -100px;
+    background-position: center;
+}
+
+.custom-navbar {
+    background: linear-gradient(45deg, black, pink);
+    color: black;
+}
+
+.color-transition {
+    background-color: blue;
+    transition: background-color 0.3s ease;
+}
+
+    .color-transition:hover {
+        background-color: cornflowerblue;
+    }
+
+
+.custom-checkbox {
+    transform: scale(1.5) translate(6px, 4px);
+}
+
+ 
+.textarea-with-lines {
+    position: relative;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.arrow-back-link {
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+}
+
+.arrow-icon {
+    margin-right: 5px;
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 2px;
+    transform: rotate(135deg);
+}
+
+.select-container {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    justify-content: center;
+    align-content: center
+}
+
+.select-container {
+    display: flex;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.select-element {
+    font-size: 20px;
+    padding: 15px;
+    border: 2px solid grey;
+    border-radius: 8px;
+    width: 570px;
+    text-align: center;
+    text-decoration-color: inherit;
+}
+
+.button {
+    padding: 15px;
+    background-color: lightblue;
+    border: 2px solid grey;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+    width: 300px;
+}
+
+.additional-info-link {
+    color: grey;
+    text-decoration: none;
+    margin-left: 475px;
+}
+
+
+.wider-table {
+    width: 200%;
+    border: 1px solid blue;
+}
