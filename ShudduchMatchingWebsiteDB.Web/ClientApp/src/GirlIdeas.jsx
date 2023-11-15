@@ -36,10 +36,10 @@ const GirlIdeas = () => {
     }
     const loadConfirmed3 = async () => {
         const { data } = await axios.get(`/api/shudduchMatchingGirl/getSelectedIdeas?girlid=${id}`);
-        console.log(data);
-        const comments = data[0].comments;
-        console.log(comments);
-        setComments(comments);
+        if (data) {
+            const comments = data[0].comments;
+            setComments(comments);
+        }
     }
 
 
@@ -202,7 +202,7 @@ const GirlIdeas = () => {
                                     )}
                                 </td>
                                 <td style={{ verticalAlign: 'middle', textAlign: 'center' }}>
-                                    <button className="btn btn-light" onClick={() => onRemoveClick(g.girlId)}>Remove</button>
+                                    <button className="btn btn-light" onClick={() => onRemoveClick(b.boyId)}>Remove</button>
                                 </td>
                                 
                             </tr>

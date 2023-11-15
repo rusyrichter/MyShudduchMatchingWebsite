@@ -33,10 +33,11 @@ const Ideas = () => {
     }
     const loadConfirmed3 = async () => {
         const { data } = await axios.get(`/api/shudduchMatching/getSelectedIdeas?boyid=${id}`);
-        console.log(data);
-        const comments = data[0].comments;
-        console.log(comments);
-        setComments(comments);
+        if (data) {
+            const comments = data[0].comments;
+            setComments(comments);
+        }
+      
     }
 
     const onAddClick = async () => {

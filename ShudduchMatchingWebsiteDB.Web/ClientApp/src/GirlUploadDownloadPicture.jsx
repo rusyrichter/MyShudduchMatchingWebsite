@@ -13,8 +13,6 @@ const GirlUploadDownloadPicture = () => {
     const [firstName, setFirstName] = useState('');
 
     useEffect(() => {
-
-
         loadConfirmed();
         loadConfirmed2();
     }, []);

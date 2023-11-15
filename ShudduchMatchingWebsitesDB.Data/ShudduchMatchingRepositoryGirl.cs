@@ -22,10 +22,10 @@ namespace ShudduchMatchingWebsite.Data
             
               return context.Girls.Where(g => g.UserId == userId).ToList();           
         }
-        public void Update(Girl girl, int id)
+        public void Update(Girl girl, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var girlToUpdate = context.Girls.FirstOrDefault(g => g.Id == id);
+            var girlToUpdate = context.Girls.FirstOrDefault(g => g.Id == id && g.UserId == userId);
             context.Girls.Update(girlToUpdate);
 
             if (girlToUpdate != null)
@@ -40,10 +40,10 @@ namespace ShudduchMatchingWebsite.Data
                 context.SaveChanges();
             }
         }
-        public void UpdateBusyStatus(Girl girl, int id)
+        public void UpdateBusyStatus(Girl girl, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var girlToUpdate = context.Girls.FirstOrDefault(g => g.Id == id);
+            var girlToUpdate = context.Girls.FirstOrDefault(g => g.Id == id && g.UserId == userId);
             
 
             if (girlToUpdate != null)
@@ -52,25 +52,25 @@ namespace ShudduchMatchingWebsite.Data
                 context.SaveChanges();
             }
         }
-        public void Delete(int id)
+        public void Delete(int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            context.Database.ExecuteSqlInterpolated(@$"delete from Ideas where GirlId = {id}");
-            context.Database.ExecuteSqlInterpolated(@$"delete from Girls where Id = {id}");
+            context.Database.ExecuteSqlInterpolated(@$"delete from Ideas where GirlId = {id} AND UserId = {userId}");
+            context.Database.ExecuteSqlInterpolated(@$"delete from Girls where Id = {id} AND UserId = {userId}");
          
         }
-        public Girl GetGirlById(int id)
+        public Girl GetGirlById(int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            return context.Girls.FirstOrDefault(g => g.Id == id);
+            return context.Girls.FirstOrDefault(g => g.Id == id && g.UserId == userId);
         }
-        public Girl UpdateAdditionalInfo(string lookingFor, string personality, string contactInfo, int id)
+        public Girl UpdateAdditionalInfo(string lookingFor, string personality, string contactInfo, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
             var girlToUpdate = context.Girls.Where(b => b.Id == id).FirstOrDefault();
-            context.Database.ExecuteSqlInterpolated(@$"Update Girls Set LookingFor = {lookingFor} where Id = {id}");
-            context.Database.ExecuteSqlInterpolated(@$"Update Girls Set Personality = {personality} where Id = {id}");
-            context.Database.ExecuteSqlInterpolated(@$"Update Girls Set ContactInfo = {contactInfo} where Id = {id}");
+            context.Database.ExecuteSqlInterpolated(@$"Update Girls Set LookingFor = {lookingFor} where Id = {id} AND UserId = {userId}");
+            context.Database.ExecuteSqlInterpolated(@$"Update Girls Set Personality = {personality} where Id = {id} AND UserId = {userId}");
+            context.Database.ExecuteSqlInterpolated(@$"Update Girls Set ContactInfo = {contactInfo} where Id = {id} AND UserId = {userId}");
             return girlToUpdate;
         }
         public void AddReference(Ref reference)
@@ -79,21 +79,21 @@ namespace ShudduchMatchingWebsite.Data
             context.Refs.Add(reference);
             context.SaveChanges();
         }
-        public List<Ref> GetReferencesById(int id)
+        public List<Ref> GetReferencesById(int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            return context.Refs.Where(g => g.GirlId == id).ToList();
+            return context.Refs.Where(g => g.GirlId == id && g.UserId == userId).ToList();
         }
-        public void DeleteReference(int id)
+        public void DeleteReference(int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
 
-            context.Database.ExecuteSqlInterpolated(@$"delete from Refs where Id = {id}");
+            context.Database.ExecuteSqlInterpolated(@$"delete from Refs where Id = {id} AND UserId = {userId}");
         }
-        public void UpdateReference(Ref reference, int id)
+        public void UpdateReference(Ref reference, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var ref2Update = context.Refs.FirstOrDefault(g => g.Id == id);
+            var ref2Update = context.Refs.FirstOrDefault(g => g.Id == id && g.UserId == userId);
             context.Refs.Update(ref2Update);
 
             if (ref2Update != null)
@@ -105,7 +105,7 @@ namespace ShudduchMatchingWebsite.Data
                 context.SaveChanges();
             }
         }
-        public void AddToFile(string name, int id, string base64)
+        public void AddToFile(string name, int id, string base64, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
             var fileEntry = context.Files.Add(new File
@@ -113,11 +113,12 @@ namespace ShudduchMatchingWebsite.Data
                 Name = name,
                 GirlId = id,
                 BaseSixtyFour = base64,
+                UserId = userId
             });
             context.SaveChanges();
         }
 
-        public void AddToPicture(string name, int id, string base64)
+        public void AddToPicture(string name, int id, string base64, int userid)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
             var fileEntry = context.Pictures.Add(new Picture
@@ -125,13 +126,14 @@ namespace ShudduchMatchingWebsite.Data
                 Name = name,
                 GirlId = id,
                 BaseSixtyFour = base64,
+                UserId = userid,
             });
             context.SaveChanges();
         }
-        public string GetFileNamebyId(int girlid)
+        public string GetFileNamebyId(int girlid, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var file = context.Files.FirstOrDefault(f => f.GirlId == girlid);
+            var file = context.Files.FirstOrDefault(f => f.GirlId == girlid && f.UserId == userId);
             if (file != null)
             {
                 return file.Name;
@@ -142,10 +144,10 @@ namespace ShudduchMatchingWebsite.Data
             }
 
         }
-        public string GetPictureNameById(int boyid)
+        public string GetPictureNameById(int boyid, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var picture = context.Pictures.FirstOrDefault(p => p.BoyId == boyid);
+            var picture = context.Pictures.FirstOrDefault(p => p.BoyId == boyid && p.UserId == userId);
             if (picture != null)
             {
                 return picture.Name;
@@ -156,23 +158,23 @@ namespace ShudduchMatchingWebsite.Data
             }
         }
 
-        public void DeleteFile(string name, int id)
+        public void DeleteFile(string name, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            context.Database.ExecuteSqlInterpolated($"delete from Files Where Girlid = {id} and Name = {name}");
+            context.Database.ExecuteSqlInterpolated($"delete from Files Where Girlid = {id} and Name = {name} and UserId = {userId}");
             context.SaveChanges();
 
         }
-        public void DeletePicture(string name, int id)
+        public void DeletePicture(string name, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            context.Database.ExecuteSqlInterpolated($"delete from Pictures Where GirlId = {id} and Name = {name}");
+            context.Database.ExecuteSqlInterpolated($"delete from Pictures Where GirlId = {id} and Name = {name} and UserId = {userId}");
             context.SaveChanges();
         }
-        public void UpdateHowLong(string howLong, int id)
+        public void UpdateHowLong(string howLong, int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var girl = context.Girls.FirstOrDefault(g => g.Id == id);
+            var girl = context.Girls.FirstOrDefault(g => g.Id == id && g.UserId == userId);
             if (girl != null)
             {
                 girl.HowLong = howLong;
@@ -180,16 +182,16 @@ namespace ShudduchMatchingWebsite.Data
             context.SaveChanges();
         }
 
-        public GirlBusy GetBusyById(int id)
+        public GirlBusy GetBusyById(int id, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            return context.GirlBusy.FirstOrDefault(g => g.GirlId == id);
+            return context.GirlBusy.FirstOrDefault(g => g.GirlId == id && g.UserId == userId);
         }
        
-        public void UpdateBusyInfo(GirlBusy busy)
+        public void UpdateBusyInfo(GirlBusy busy, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var girlBusy = context.GirlBusy.FirstOrDefault(g => g.GirlId == busy.GirlId);
+            var girlBusy = context.GirlBusy.FirstOrDefault(g => g.GirlId == busy.GirlId && g.UserId == userId);
             if (girlBusy == null)
             {
                 context.GirlBusy.Add(busy);               
@@ -212,29 +214,31 @@ namespace ShudduchMatchingWebsite.Data
         public void AddIdea(Idea ide)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            var idea = context.Ideas.FirstOrDefault(i => i.BoyId == ide.BoyId && i.GirlId == ide.GirlId);
+            var usersId = context.Girls.FirstOrDefault(i => i.Id == ide.GirlId).UserId;
+            var idea = context.Ideas.FirstOrDefault(i => i.BoyId == ide.BoyId && i.GirlId == ide.GirlId && i.UserId == ide.UserId);
             if (idea == null)
             {
                 context.Ideas.Add(new Idea
                 {
                     BoyId = ide.BoyId,
                     GirlId = ide.GirlId,
+                    UserId = ide.UserId,
                 });
             }
 
             context.SaveChanges();
         }
-        public void RemoveIdea(Idea ide)
+        public void RemoveIdea(Idea ide, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            context.Database.ExecuteSqlInterpolated(@$"delete from Ideas where BoyId = {ide.BoyId} AND GirlId = {ide.GirlId}");
+            context.Database.ExecuteSqlInterpolated(@$"delete from Ideas where BoyId = {ide.BoyId} AND GirlId = {ide.GirlId} AND UserId = {userId}");
         }
-        public List<Idea> GetSelectedIdeas(int girlid)
+        public List<Idea> GetSelectedIdeas(int girlid, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
 
             var selectedIdeas = context.Ideas
-                .Where(i => i.GirlId == girlid)
+                .Where(i => i.GirlId == girlid && i.UserId == userId)
                 .Join(
                     context.Boys,
                     idea => idea.BoyId,
@@ -255,10 +259,10 @@ namespace ShudduchMatchingWebsite.Data
             return selectedIdeas;
         }
 
-        public void UpdateIdea(Idea ide)
+        public void UpdateIdea(Idea ide, int userId)
         {
             using var context = new ShudduchMatchingDBContext(_connectionString);
-            context.Database.ExecuteSqlInterpolated(@$"Update Ideas Set Comments = {ide.Comments} Where BoyId = {ide.BoyId} AND GirlId = {ide.GirlId}");
+            context.Database.ExecuteSqlInterpolated(@$"Update Ideas Set Comments = {ide.Comments} Where BoyId = {ide.BoyId} AND GirlId = {ide.GirlId} AND UserId = {userId}");
         }
 
     }

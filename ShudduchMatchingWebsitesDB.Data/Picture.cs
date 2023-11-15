@@ -7,5 +7,6 @@
         public int BoyId { get; set; }
         public int GirlId { get; set; }
         public string BaseSixtyFour { get; set; }
+        public int UserId { get; set; }
     }
 }

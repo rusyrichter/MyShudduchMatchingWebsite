@@ -18,5 +18,6 @@ namespace ShudduchMatchingWebsite.Data
         public string HomePhone { get; set; }
         public string CellPhone { get; set; }
         public string Comments { get; set; }
+        public int UserId { get; set; }
     }
 }

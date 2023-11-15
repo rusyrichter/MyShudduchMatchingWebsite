@@ -11,5 +11,6 @@
         public string Location { get; set; }
         public string Schools { get; set; }
         public string Comments { get; set; }
+        public int UserId { get; set; }
     }
 }
