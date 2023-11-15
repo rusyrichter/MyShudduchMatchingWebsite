@@ -249,7 +249,7 @@ const GBusy = () => {
 
                 </tbody>
             </table>
-            <div style={{ marginTop: '300px', textAlign: 'center' }}>
+            <div style={{ marginTop: '200px', textAlign: 'center' }}>
                 <Link to={'/girl'} style={{ color: 'grey', textDecoration: 'none' }}>
                     <span style={{ marginRight: '5px' }}>&#8592;</span>
                     Back to Girls

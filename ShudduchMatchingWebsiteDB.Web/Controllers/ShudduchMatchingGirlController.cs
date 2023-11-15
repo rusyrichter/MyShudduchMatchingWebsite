@@ -41,107 +41,84 @@ namespace ShudduchMatchingWebsiteDB.Web.Controllers
         [Route("updateGirl")]
         public void UpdateGirl(Girl girl)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.Update(girl, girl.Id, user.Id);
+            repo.Update(girl, girl.Id);
         }
         [HttpPost]
         [Route("updateBusyStatus")]
         public void UpdateBusyStatus(Girl girl)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.UpdateBusyStatus(girl, girl.Id, user.Id);
+            repo.UpdateBusyStatus(girl, girl.Id);
         }
         [HttpPost]
         [Route("deleteGirl")]
         public void DeleteBoy(Girl girl)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.Delete(girl.Id, user.Id);
+            repo.Delete(girl.Id);
         }
         [HttpGet]
         [Route("getGirlById")]
         public Girl GetGirlById(int id)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            return repo.GetGirlById(id, user.Id);
+            return repo.GetGirlById(id);
         }
         [HttpPost]
         [Route("updateAdditionalInfo")]
         public Girl UpdateAdditionalInfo(Girl g)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            return repo.UpdateAdditionalInfo(g.LookingFor, g.Personality, g.ContactInfo, g.Id, user.Id);
+            return repo.UpdateAdditionalInfo(g.LookingFor, g.Personality, g.ContactInfo, g.Id);
         }
         [HttpPost]
         [Route("addReferenceToGirl")]
         public void AddReference(Ref reference)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            reference.UserId = user.Id;
             repo.AddReference(reference);
         }
         [HttpGet]
         [Route("getReferencesbyGirlid")]
         public List<Ref> GetReferencesbyGirlid(int girlId)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            return repo.GetReferencesById(girlId, user.Id);
+            return repo.GetReferencesById(girlId);
         }
         [HttpPost]
         [Route("deleteReference")]
         public void DeleteReference(Ref reference)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.DeleteReference(reference.Id, user.Id);
+            repo.DeleteReference(reference.Id);
         }
         [HttpPost]
         [Route("updateReference")]
         public void UpdateReference(Ref reference)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.UpdateReference(reference, reference.Id, user.Id);
+            repo.UpdateReference(reference, reference.Id);
         }
         [HttpPost]
         [Route("upload")]
         public void Upload(UploadViewModelGirl vm)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             string base64 = vm.Base64.Substring(vm.Base64.IndexOf(",") + 1);
             byte[] imageBytes = Convert.FromBase64String(base64);
             System.IO.File.WriteAllBytes($"uploads/{vm.Name}", imageBytes);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.AddToFile(vm.Name, vm.GirlId, base64, user.Id);
+            repo.AddToFile(vm.Name, vm.GirlId, base64);
         }
         [HttpPost]
         [Route("uploadPicture")]
         public void UploadPicture(UploadViewModelGirl vm)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             string base64 = vm.Base64.Substring(vm.Base64.IndexOf(",") + 1);
             byte[] imageBytes = Convert.FromBase64String(base64);
             System.IO.File.WriteAllBytes($"pictureuploads/{vm.Name}", imageBytes);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.AddToPicture(vm.Name, vm.GirlId, base64, user.Id);
+            repo.AddToPicture(vm.Name, vm.GirlId, base64);
         }
 
 
@@ -182,108 +159,85 @@ namespace ShudduchMatchingWebsiteDB.Web.Controllers
         [Route("deleteupload")]
         public void DeleteUpload(UploadViewModelGirl vm)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             string filePath = Path.Combine("uploads", vm.Name);
             System.IO.File.Delete(filePath);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.DeleteFile(vm.Name, vm.GirlId, user.Id);
+            repo.DeleteFile(vm.Name, vm.GirlId);
         }
 
         [HttpPost]
         [Route("deletePictureupload")]
         public void DeletePictureUpload(UploadViewModelGirl vm)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             string filePath = Path.Combine("pictureuploads", vm.Name);
             System.IO.File.Delete(filePath);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.DeletePicture(vm.Name, vm.GirlId, user.Id);
+            repo.DeletePicture(vm.Name, vm.GirlId);
         }
         [HttpGet]
         [Route("getFileDownloaded")]
         public string GetFileName(int girlid)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            return repo.GetFileNamebyId(girlid, user.Id);
+            return repo.GetFileNamebyId(girlid);
         }
         [HttpGet]
         [Route("getPictureDownloaded")]
         public string GetPictureDownloaded(int boyid)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            return repo.GetPictureNameById(boyid, user.Id);
+            return repo.GetPictureNameById(boyid);
         }
         [HttpPost]
         [Route("updateHowLong")]
         public void UpdateHowLong(Girl g)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.UpdateHowLong(g.HowLong, g.Id, user.Id);
+            repo.UpdateHowLong(g.HowLong, g.Id);
         }
         [HttpGet]
         [Route("getBusy")]
         public GirlBusy GetBusy(int girlid)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            return repo.GetBusyById(girlid, user.Id);
+            return repo.GetBusyById(girlid);
         }
 
         [HttpPost]
         [Route("updateBusyInfo")]
         public void UpdateBusyInfo(GirlBusy girlBusy)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.UpdateBusyInfo(girlBusy, user.Id);
+            repo.UpdateBusyInfo(girlBusy);
         }
 
         [HttpPost]
         [Route("addIdea")]
         public void AddIdea(Idea idea)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            idea.UserId = user.Id;
             repo.AddIdea(idea);
         }
         [HttpPost]
         [Route("removeIdea")]
         public void RemoveIdea(Idea idea)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.RemoveIdea(idea, user.Id);
+            repo.RemoveIdea(idea);
         }
         [HttpPost]
         [Route("updateIdea")]
         public void UpdateIdea(Idea idea)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            repo.UpdateIdea(idea, user.Id);
+            repo.UpdateIdea(idea);
         }
         [HttpGet]
         [Route("getSelectedIdeas")]
         public List<Idea> GetSelectedIdeas(int girlid)
         {
-            var userRepo = new UserRepository(_connectionString);
-            var user = userRepo.GetByEmail(User.Identity.Name);
             var repo = new ShudduchMatchingRepositoryGirl(_connectionString);
-            var ideas = repo.GetSelectedIdeas(girlid, user.Id);
+            var ideas = repo.GetSelectedIdeas(girlid);
             return ideas;
 
         }
